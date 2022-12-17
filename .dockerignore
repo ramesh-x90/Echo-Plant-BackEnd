@@ -1,0 +1,6 @@
+dist
+html
+node_modules
+src
+prisma
+test

@@ -1,9 +1,10 @@
-import { Global, INestApplication, Injectable } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { PrismaService } from '../prisma-module/prisma.service';
 import { SwaggerConfig } from './swaggerConfig/SwaggerConfig';
 import * as cookieParser from 'cookie-parser'
 import * as cors from 'cors'
 import { ConfigService } from '@nestjs/config';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 
 @Injectable()
@@ -14,7 +15,9 @@ export class AppConfigService {
 
     }
 
-    setUp(app: INestApplication) {
+    setUp(app: NestExpressApplication) {
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
+        app.set('trust proxy', 1)
         this.swaggerConfig.setUp(app)
         app.use(cookieParser());
         app.use(cors({

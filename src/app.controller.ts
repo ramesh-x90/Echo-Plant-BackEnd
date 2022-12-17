@@ -12,7 +12,7 @@ export class AppController {
   @Get()
   @ApiOperation({ summary: "this is the home", operationId: "getHello" })
   async getHello(): Promise<any> {
-    return { message: "hello world..." };
+    return { message: "hello..." };
   }
 
 
